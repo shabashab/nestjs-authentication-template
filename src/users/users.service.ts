@@ -11,7 +11,7 @@ export class UsersService {
     private readonly _usersRepository: Repository<User>
   ) {}
 
-  public async getUserByUsername(username: string): Promise<User> {
+  public async findByUsername(username: string): Promise<User> {
     const user = await this._usersRepository.findOne({
       username,
     });
@@ -22,7 +22,7 @@ export class UsersService {
     return user;
   }
 
-  public async getUserById(id: string): Promise<User> {
+  public async findById(id: string): Promise<User> {
     const user = await this._usersRepository.findOne({
       id,
     });

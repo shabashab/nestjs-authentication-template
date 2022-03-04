@@ -10,5 +10,6 @@ export const createValidationSchema = (): joi.ObjectSchema => {
     [configLiterals.PG_USERNAME]: joi.string().not().empty().required(),
     [configLiterals.PG_PASSWORD]: joi.string().not().empty().required(),
     [configLiterals.PG_DB]: joi.string().not().empty().required(),
+		[configLiterals.JWT_SECRET_KEY]: joi.string().not().empty().required()
   });
 };
