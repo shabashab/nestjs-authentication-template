@@ -3,6 +3,6 @@ import { CryptographyService } from "./cryptography.service";
 
 @Module({
   providers: [CryptographyService],
-	exports: [CryptographyService]
+  exports: [CryptographyService],
 })
 export class CryptographyModule {}
