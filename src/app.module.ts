@@ -6,6 +6,7 @@ import { TypeOrmModule, TypeOrmModuleOptions } from "@nestjs/typeorm";
 
 import { configLiterals, createValidationSchema } from "./config";
 import { User } from "./entities/user.entity";
+import { UsersModule } from "./users/users.module";
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { User } from "./entities/user.entity";
         };
       },
     }),
+    UsersModule,
   ],
   controllers: [],
   providers: [],
