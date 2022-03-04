@@ -1,11 +1,19 @@
 import { Injectable } from "@nestjs/common";
-import * as bcrypt from "bcrypt";
+import { ConfigService } from "@nestjs/config";
+import { configLiterals } from "src/config";
 
-//TODO: move hash salt rounds count to config
-const HASH_SALT_ROUNDS = 10;
+import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class CryptographyService {
+  private _hashSaltRounds: number;
+
+  public constructor(_configService: ConfigService) {
+    this._hashSaltRounds = _configService.get<number>(
+      configLiterals.HASH_SALT_ROUNDS
+    );
+  }
+
   public async comparePassword(
     password: string,
     passwordHash: string
@@ -14,6 +22,6 @@ export class CryptographyService {
   }
 
   public async createPasswordHash(password: string): Promise<string> {
-    return await bcrypt.hash(password, HASH_SALT_ROUNDS);
+    return await bcrypt.hash(password, this._hashSaltRounds);
   }
 }
