@@ -1,3 +1,4 @@
+import { ClassSerializerInterceptor } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory, Reflector } from "@nestjs/core";
 import { AppModule } from "./app.module";
@@ -10,6 +11,7 @@ async function bootstrap() {
 
   const reflector = app.get<Reflector>(Reflector);
   app.useGlobalGuards(new PermissionsGuard(reflector));
+  app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
 
   const config = app.get(ConfigService);
   const port = config.get<number>(configLiterals.PORT);
