@@ -1,9 +1,9 @@
 {
   "name": "nestjs-authentication-template",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
-  "author": "",
-  "private": true,
+  "author": "shabashab",
+  "private": false,
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
