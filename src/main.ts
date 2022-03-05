@@ -5,8 +5,11 @@ import { AppModule } from "./app.module";
 import { PermissionsGuard } from "./authorization/permissions.guard";
 import { configLiterals } from "./config";
 
+import helmet from "helmet";
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+	app.use(helmet());
   await app.init();
 
   const reflector = app.get<Reflector>(Reflector);
