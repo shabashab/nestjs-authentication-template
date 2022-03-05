@@ -8,8 +8,6 @@ import { configLiterals, createValidationSchema } from "./config";
 import { User } from "./entities/user.entity";
 import { UsersModule } from "./users/users.module";
 
-import { JwtModule, JwtModuleOptions } from "@nestjs/jwt";
-
 @Module({
   imports: [
     AuthenticationModule,
