@@ -12,10 +12,12 @@ async function bootstrap() {
   const reflector = app.get<Reflector>(Reflector);
   app.useGlobalGuards(new PermissionsGuard(reflector));
   app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
-	app.useGlobalPipes(new ValidationPipe({
-		forbidUnknownValues: true,
-		forbidNonWhitelisted: true
-	}));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      forbidUnknownValues: true,
+      forbidNonWhitelisted: true,
+    })
+  );
 
   const config = app.get(ConfigService);
   const port = config.get<number>(configLiterals.PORT);
