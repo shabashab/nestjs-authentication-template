@@ -11,6 +11,7 @@ The template implements such things:
 - Config module and service ready to use
 - `helmet` library and cors with deafult settings
 - `prettier` configuration
+- `Dockerfile` and `docker-compose.yml` for quick docker deployment
 
 ## Package manager and build
 
@@ -34,3 +35,22 @@ By default these environment variables are necessary for the project to work (or
 - `PG_PASSWORD` - password of postgres user
 - `PG_DB` - postgres database
 - `JWT_SECRET_KEY` - a JWT encryption key
+
+## Docker
+
+The `Dockerfile` and `docker-compose.yml` files are included in the repository.
+
+`docker-compose.yml` starts the project alongside the postgres database, so be aware of not using it during development.
+
+Building and using a container is not different from any other project. The simplest use scenario:
+
+```
+docker build . -t nestjs-authentication-template
+docker run -it -p 3000:3000 nestjs-authentication-template
+```
+
+Or using `docker-compose` for deployment:
+
+```
+docker-compose up
+```
