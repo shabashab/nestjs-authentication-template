@@ -4,6 +4,8 @@ import { AuthenticationController } from "./authentication.controller";
 import { JwtModule, JwtModuleOptions } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 import { configLiterals } from "src/config";
+import { UsersModule } from "src/users/users.module";
+import { CryptographyModule } from "src/cryptography/cryptography.module";
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { configLiterals } from "src/config";
         };
       },
     }),
+    UsersModule,
+    CryptographyModule,
   ],
   providers: [AuthenticationService],
   controllers: [AuthenticationController],
