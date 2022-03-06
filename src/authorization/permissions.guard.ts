@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { User } from "src/entities/user.entity";
-import { PERMISSIONS_METADATA_KEY } from "./authorization.constants";
+import { MetadataKey } from "src/metadata-key.enum";
 import { Permission } from "./permission.enum";
 
 @Injectable()
@@ -9,8 +9,10 @@ export class PermissionsGuard implements CanActivate {
   public constructor(private readonly _reflector: Reflector) {}
 
   public canActivate(context: ExecutionContext): boolean {
+    console.log("Here we are");
+
     const requiredPermissions: Permission[] = this._reflector.getAllAndOverride(
-      PERMISSIONS_METADATA_KEY,
+      MetadataKey.REQUIRED_PERMISSIONS,
       [context.getClass(), context.getHandler()]
     );
 

@@ -1,3 +1,5 @@
 export enum Permission {
-  canLogin = "can_login",
+  login = "login",
+  createUsers = "create_users",
+  getUsersList = "get_users_list",
 }

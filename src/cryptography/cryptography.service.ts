@@ -18,7 +18,7 @@ export class CryptographyService {
     password: string,
     passwordHash: string
   ): Promise<boolean> {
-    return await bcrypt.compare(password, passwordHash);
+    return bcrypt.compare(password, passwordHash);
   }
 
   public async createPasswordHash(password: string): Promise<string> {
