@@ -1,6 +1,6 @@
-import { Permission } from "src/authorization/permission.enum";
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 import { Exclude } from "class-transformer";
+import { RoleName } from "src/roles/role-name.enum";
 
 @Entity()
 export class User {
@@ -18,8 +18,7 @@ export class User {
 
   @Column({
     type: "enum",
-    enum: Permission,
+    enum: RoleName,
   })
-  @Exclude()
-  public permissions: Permission[];
+  public role: RoleName;
 }

@@ -6,7 +6,6 @@ import { configLiterals } from "./config";
 
 import helmet from "helmet";
 import { JwtAuthGuard } from "./authentication/guards/jwt-auth.guard";
-import { PermissionsGuard } from "./authorization/permissions.guard";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,10 +15,7 @@ async function bootstrap() {
   const reflector = app.get<Reflector>(Reflector);
   const configService = app.get<ConfigService>(ConfigService);
 
-  app.useGlobalGuards(
-    new JwtAuthGuard(reflector),
-    new PermissionsGuard(reflector, configService)
-  );
+  app.useGlobalGuards(new JwtAuthGuard(reflector));
   app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
   app.useGlobalPipes(
     new ValidationPipe({

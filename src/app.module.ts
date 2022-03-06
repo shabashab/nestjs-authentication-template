@@ -7,6 +7,8 @@ import { TypeOrmModule, TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { configLiterals, createValidationSchema } from "./config";
 import { User } from "./entities/user.entity";
 import { UsersModule } from "./users/users.module";
+import { CaslModule } from "./casl/casl.module";
+import { RolesModule } from "./roles/roles.module";
 
 @Module({
   imports: [
@@ -32,6 +34,8 @@ import { UsersModule } from "./users/users.module";
       },
     }),
     UsersModule,
+    CaslModule,
+    RolesModule,
   ],
   controllers: [],
   providers: [],

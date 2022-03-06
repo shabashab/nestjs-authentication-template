@@ -5,9 +5,9 @@ import { Repository } from "typeorm";
 import { UserNotFoundException } from "src/exceptions";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { CryptographyService } from "src/cryptography/cryptography.service";
-import { Permission } from "src/authorization/permission.enum";
+import { RoleName } from "src/roles/role-name.enum";
 
-const DEFAULT_USER_PERMISSIONS: Permission[] = [Permission.login];
+const DEFAULT_USER_ROLE: RoleName = RoleName.User;
 
 @Injectable()
 export class UsersService {
@@ -16,6 +16,10 @@ export class UsersService {
     private readonly _usersRepository: Repository<User>,
     private readonly _cryptoService: CryptographyService
   ) {}
+
+  public async findAll(): Promise<User[]> {
+    return await this._usersRepository.find();
+  }
 
   public async findByUsername(username: string): Promise<User> {
     const user = await this._usersRepository.findOne({
@@ -57,7 +61,7 @@ export class UsersService {
     const userObject = this._usersRepository.save({
       username: createUserDto.username,
       passwordHash,
-      DEFAULT_USER_PERMISSIONS,
+      role: DEFAULT_USER_ROLE,
     });
 
     const user = new User();
