@@ -14,9 +14,11 @@ async function bootstrap() {
   app.enableCors();
 
   const reflector = app.get<Reflector>(Reflector);
+  const configService = app.get<ConfigService>(ConfigService);
+
   app.useGlobalGuards(
     new JwtAuthGuard(reflector),
-    new PermissionsGuard(reflector)
+    new PermissionsGuard(reflector, configService)
   );
   app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
   app.useGlobalPipes(
@@ -29,8 +31,7 @@ async function bootstrap() {
 
   await app.init();
 
-  const config = app.get(ConfigService);
-  const port = config.get<number>(configLiterals.PORT);
+  const port = configService.get<number>(configLiterals.PORT);
 
   await app.listen(port);
 }
