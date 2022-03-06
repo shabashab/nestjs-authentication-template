@@ -7,10 +7,11 @@ import {
 
 export class UserRoleAbilityFactory extends RoleAbilityFactory {
   configureAbilityBuilderForUser(
-    _user: User,
+    user: User,
     builder: AppAbilityBuilder
   ): AppAbilityBuilder {
     builder.cannot(Action.Manage, User);
+    builder.can(Action.Update, User, { id: user.id });
 
     return builder;
   }

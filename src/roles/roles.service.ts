@@ -12,10 +12,10 @@ export class RolesService {
     userRoleAbilityFactory: UserRoleAbilityFactory,
     adminRoleAbilityFactory: AdminRoleAbilityFactory
   ) {
-		this._abilityFactories = {
-			user: userRoleAbilityFactory,
-			admin: adminRoleAbilityFactory
-		};
+    this._abilityFactories = {
+      user: userRoleAbilityFactory,
+      admin: adminRoleAbilityFactory,
+    };
   }
 
   public getRoleAbilityFactoryByName(name: RoleName): RoleAbilityFactory {

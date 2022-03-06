@@ -9,17 +9,17 @@ import { LocalAuthGuard } from "./guards/local-auth.guard";
 export class AuthenticationController {
   public constructor(private readonly _authService: AuthenticationService) {}
 
-  @Post("")
+  @Post()
   @UseGuards(LocalAuthGuard)
   public async authenticate(@CurrentUser() user: User) {
-    const authToken = this._authService.createAuthenticationToken(user);
+    const authToken = await this._authService.createAuthenticationToken(user);
 
     return {
       token: authToken,
     };
   }
 
-  @Get("")
+  @Get()
   @UseGuards(JwtAuthGuard)
   public async getCurrentUser(@CurrentUser() user: User) {
     return user;

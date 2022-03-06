@@ -12,13 +12,17 @@ export class User {
   })
   public username: string;
 
-  @Column()
+  @Column({
+    nullable: false,
+  })
   @Exclude()
   public passwordHash: string;
 
   @Column({
     type: "enum",
     enum: RoleName,
+    nullable: false,
+    default: RoleName.User,
   })
   public role: RoleName;
 }

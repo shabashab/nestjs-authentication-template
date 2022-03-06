@@ -6,6 +6,7 @@ import { UserNotFoundException } from "src/exceptions";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { CryptographyService } from "src/cryptography/cryptography.service";
 import { RoleName } from "src/roles/role-name.enum";
+import { UpdateUserDto } from "./dto/update-user.dto";
 
 const DEFAULT_USER_ROLE: RoleName = RoleName.User;
 
@@ -43,12 +44,16 @@ export class UsersService {
   }
 
   public async checkIsUsernameAvailable(username: string): Promise<boolean> {
-    const sameUsernameUser = this.findByUsername(username);
-    return !sameUsernameUser;
+    try {
+      await this.findByUsername(username);
+      return false;
+    } catch (e) {
+      return true;
+    }
   }
 
   public async create(createUserDto: CreateUserDto): Promise<User> {
-    if (!this.checkIsUsernameAvailable(createUserDto.username)) {
+    if (!(await this.checkIsUsernameAvailable(createUserDto.username))) {
       throw new ConflictException(
         "The user with specified username already exists"
       );
@@ -58,7 +63,7 @@ export class UsersService {
       createUserDto.password
     );
 
-    const userObject = this._usersRepository.save({
+    const userObject = await this._usersRepository.save({
       username: createUserDto.username,
       passwordHash,
       role: DEFAULT_USER_ROLE,
@@ -67,6 +72,31 @@ export class UsersService {
     const user = new User();
     Object.assign(user, userObject);
 
+    return user;
+  }
+
+  public async createAdmin(createUserDto: CreateUserDto): Promise<User> {
+    const user = await this.create(createUserDto);
+    user.role = RoleName.Admin;
+    await this._usersRepository.save(user);
+    return user;
+  }
+
+  public async updateUserById(
+    id: string,
+    updateUserDto: UpdateUserDto
+  ): Promise<User> {
+    const user = await this.findById(id);
+    user.passwordHash = await this._cryptoService.createPasswordHash(
+      updateUserDto.password
+    );
+    await this._usersRepository.save(user);
+    return user;
+  }
+
+  public async deleteUserById(id: string): Promise<User> {
+    const user = await this.findById(id);
+    await this._usersRepository.delete({ id });
     return user;
   }
 }
