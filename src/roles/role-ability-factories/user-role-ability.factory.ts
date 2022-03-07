@@ -10,8 +10,10 @@ export class UserRoleAbilityFactory extends RoleAbilityFactory {
     user: User,
     builder: AppAbilityBuilder
   ): AppAbilityBuilder {
-    builder.cannot(Action.Manage, User);
-    builder.can(Action.Update, User, { id: user.id });
+    builder.can([Action.Read, Action.Update], User, {
+			id: user.id	
+		});
+    builder.cannot([Action.Create, Action.Delete, Action.ReadAll], User);
 
     return builder;
   }
