@@ -7,5 +7,4 @@ export const configLiterals = {
   PG_PORT: "PG_PORT",
   PG_DB: "PG_DB",
   JWT_SECRET_KEY: "JWT_SECRET_KEY",
-  IGNORE_POLICIES: "IGNORE_POLICIES",
 };
