@@ -29,14 +29,14 @@ export class PoliciesCheckerService {
     );
   }
 
-	public checkPoliciesForUserOrThrowForbidden(
-		user: User,
-		policyHandlers: PolicyHandler[],
-		exceptionMessage?: string
-	) {
-		const result = this.checkPoliciesForUser(user, policyHandlers);
+  public checkPoliciesForUserOrThrowForbidden(
+    user: User,
+    policyHandlers: PolicyHandler[],
+    exceptionMessage?: string
+  ) {
+    const result = this.checkPoliciesForUser(user, policyHandlers);
 
-		if(result) return;
-		throw new ForbiddenException(exceptionMessage);
-	}
+    if (result) return;
+    throw new ForbiddenException(exceptionMessage);
+  }
 }

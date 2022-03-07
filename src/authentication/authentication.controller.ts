@@ -1,4 +1,4 @@
-import {RequireAuthentication} from "./require-authentication.decorator";
+import { RequireAuthentication } from "./require-authentication.decorator";
 import { Controller, Post, Get, UseGuards } from "@nestjs/common";
 import { User } from "src/entities/user.entity";
 import { AuthenticationService } from "./authentication.service";
@@ -20,7 +20,7 @@ export class AuthenticationController {
   }
 
   @Get()
-	@RequireAuthentication()
+  @RequireAuthentication()
   public async getCurrentUser(@CurrentUser() user: User) {
     return user;
   }

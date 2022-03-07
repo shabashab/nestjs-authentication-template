@@ -1,4 +1,9 @@
-import { Ability, AbilityBuilder, AbilityClass, ExtractSubjectType } from "@casl/ability";
+import {
+  Ability,
+  AbilityBuilder,
+  AbilityClass,
+  ExtractSubjectType,
+} from "@casl/ability";
 import { AppAbility, Subjects } from "src/casl/app-ability.type";
 import { User } from "src/entities/user.entity";
 
@@ -12,9 +17,10 @@ export abstract class RoleAbilityFactory {
 
     this.configureAbilityBuilderForUser(user, abilityBuilder).build();
 
-		return abilityBuilder.build({
-			detectSubjectType: item => item.constructor as ExtractSubjectType<Subjects>
-		});
+    return abilityBuilder.build({
+      detectSubjectType: (item) =>
+        item.constructor as ExtractSubjectType<Subjects>,
+    });
   }
 
   protected abstract configureAbilityBuilderForUser(

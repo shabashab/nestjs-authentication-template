@@ -12,7 +12,7 @@ export interface ActionPolicyHandlers {
 export interface CrudPolicyHandlers {
   create: ActionPolicyHandlers;
   read: ActionPolicyHandlers;
-	readAll: PolicyHandler;
+  readAll: PolicyHandler;
   update: ActionPolicyHandlers;
   delete: ActionPolicyHandlers;
 }
@@ -50,7 +50,7 @@ export const generateCrudPolicyHandlersForSubject = (
 ): CrudPolicyHandlers => {
   return {
     read: generatePolicyHandlersForAction(Action.Read, subject),
-		readAll: generatePolicyHandlerForEvery(Action.ReadAll, subject),
+    readAll: generatePolicyHandlerForEvery(Action.ReadAll, subject),
     update: generatePolicyHandlersForAction(Action.Update, subject),
     create: generatePolicyHandlersForAction(Action.Create, subject),
     delete: generatePolicyHandlersForAction(Action.Delete, subject),
