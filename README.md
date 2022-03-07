@@ -12,6 +12,7 @@ The template implements such things:
 - `helmet` library and cors with deafult settings
 - `prettier` configuration
 - `Dockerfile` and `docker-compose.yml` for quick docker deployment
+- RBAC (Role-based access control) using `casl`
 
 ## Package manager and build
 
@@ -22,6 +23,7 @@ The scripts are the same with the default Nest.js template. The common ones are:
 - `start` - build & start the application without auto-reload
 - `start:dev` - build & start the application with auto-reload
 - `format` - format the application files with `prettier`
+- `lint` - run eslint with autofix
 
 ## Environment variables configuration
 
@@ -54,3 +56,4 @@ Or using `docker-compose` for deployment:
 ```
 docker-compose up
 ```
+
