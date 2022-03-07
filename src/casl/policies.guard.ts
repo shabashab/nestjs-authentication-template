@@ -9,9 +9,8 @@ import { PolicyHandler } from "./policy-handler.type";
 export class PoliciesGuard implements CanActivate {
   public constructor(
     private readonly _reflector: Reflector,
-    private readonly _policiesCheckerService: PoliciesCheckerService,
-  ) {
-  }
+    private readonly _policiesCheckerService: PoliciesCheckerService
+  ) {}
 
   public canActivate(context: ExecutionContext): boolean {
     const policyHandlers = this._reflector.get<PolicyHandler[]>(
